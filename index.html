@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Untuk Awak 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(-45deg, #fce7f3, #fbcfe8, #fdf2f8, #f9a8d4);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #831843;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* =========================================
+           BAHAGIAN DEPAN
+           ========================================= */
+        #halaman-depan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        .bunga-hiasan {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 10px 15px rgba(236, 72, 153, 0.3));
+        }
+
+        .teks-klik {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: #be185d;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 20px rgba(244, 114, 182, 0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* =========================================
+           BAHAGIAN ISI SURAT (Glassmorphism)
+           ========================================= */
+        #surat-sebenar {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+            max-width: 450px;
+            margin: auto;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(236, 72, 153, 0.15);
+            position: relative;
+        }
+
+        .pin-comel {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1), 0 4px 10px rgba(236, 72, 153, 0.2);
+        }
+
+        .isi-surat {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: #881337;
+            text-align: center;
+            min-height: 350px; /* Sediakan ruang siap-siap supaya kad tak memanjang tiba-tiba masa taip */
+        }
+
+        .gif-container {
+            margin: 20px 0;
+            display: none; /* Disorokkan dulu sebelum ayat 1 habis ditaip */
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .gif-lari {
+            width: 140px;
+            border-radius: 12px;
+            border: 5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .glass-card { padding: 30px 20px; }
+            .isi-surat { font-size: 1.4rem; min-height: 300px; }
+            .gif-lari { width: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Muka Depan -->
+    <div id="halaman-depan" onclick="bukaSurat()">
+        <div class="bunga-hiasan">🌸</div>
+        <div class="teks-klik">Khas untuk Enol</div>
+    </div>
+
+    <!-- Surat Glassmorphism -->
+    <div id="surat-sebenar">
+        <div class="glass-card">
+            <div class="pin-comel"></div>
+            <div class="isi-surat">
+                <span id="teks-bahagian-1"></span>
+                <div class="gif-container" id="gif-kucing">
+                    <!-- Pastikan fail lari.gif ni ada dalam GitHub kau -->
+                    <img src="lari.gif" alt="Kartun lari comel" class="gif-lari">
+                </div>
+                <span id="teks-bahagian-2"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ayat yang akan ditaip automatik (\n bermaksud enter baris baru)
+        const ayat1 = "Hai kamu yang cantik! ✨\n\nEsok dah nak pegi PLKN kan? Good luck tau! Jangan risau, kamu mesti boleh harunginya dengan cemerlang.";
+        const ayat2 = "Nanti masa ada aktiviti lari-lari, jaga diri elok-elok. Jaga kesihatan, jangan skip makan, dan enjoy the moment ok?\n\nSaya doakan dari jauh. You got this! Semangat! 💪💖";
+
+        // Fungsi efek menaip (Typewriter)
+        function taip(idElemen, teks, kelajuan, i, callback) {
+            if (i < teks.length) {
+                // Tukar \n jadi break line HTML
+                if (teks.charAt(i) === '\n') {
+                    document.getElementById(idElemen).innerHTML += '<br>';
+                } else {
+                    document.getElementById(idElemen).innerHTML += teks.charAt(i);
+                }
+                setTimeout(() => taip(idElemen, teks, kelajuan, i + 1, callback), kelajuan);
+            } else if (callback) {
+                callback(); // Jalankan langkah seterusnya bila siap taip
+            }
+        }
+
+        function bukaSurat() {
+            const depan = document.getElementById('halaman-depan');
+            const surat = document.getElementById('surat-sebenar');
+
+            // 1. Hilangkan muka depan
+            depan.style.opacity = '0';
+            depan.style.transform = 'scale(0.8)';
+
+            setTimeout(() => {
+                depan.style.display = 'none';
+                surat.style.display = 'block';
+                
+                // 2. Timbulkan kad surat
+                setTimeout(() => {
+                    surat.style.opacity = '1';
+                    surat.style.transform = 'scale(1) translateY(0)';
+                    
+                    // 3. Mula taip ayat bahagian pertama lepas kad siap timbul
+                    setTimeout(() => {
+                        taip('teks-bahagian-1', ayat1, 40, 0, () => {
+                            
+                            // 4. Munculkan GIF bila ayat pertama habis
+                            const gif = document.getElementById('gif-kucing');
+                            gif.style.display = 'flex';
+                            setTimeout(() => {
+                                gif.style.opacity = '1';
+                                
+                                // 5. Tunggu sekejap dan taip ayat bahagian kedua
+                                setTimeout(() => {
+                                    taip('teks-bahagian-2', ayat2, 40, 0);
+                                }, 500); // Rehat 0.5 saat sebelum taip ayat last
+                                
+                            }, 50);
+                        });
+                    }, 500); // Rehat 0.5 saat sebelum mula menaip
+
+                }, 50);
+            }, 500); 
+        }
+    </script>
+
+</body>
+</html>
